@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "sanity start",
-    "test": "sanity check"
+    "test": "eslint . && sanity check"
   },
   "dependencies": {
     "@sanity/base": "^1.149.3",
@@ -22,10 +22,20 @@
     "react-dom": "^16.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@sanity/cli": "^1.149.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
     "prettier": "1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn test",
+      "pre-push": "yarn test"
+    }
   }
 }
